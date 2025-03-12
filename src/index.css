@@ -1,0 +1,22 @@
+/*Font Family Pop pins*/
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Moul&display=swap');
+
+/*Tailwind Init*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*Global Config*/
+@layer base {
+    body {
+        @apply font-primary m-0 scroll-smooth;
+    }
+}
+
+
+/*Components Config*/
+@layer components {
+
+}
+
