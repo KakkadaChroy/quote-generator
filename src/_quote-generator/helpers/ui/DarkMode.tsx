@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {Sun, Moon} from 'lucide-react';
 
 const ThemeToggle = () => {
-    const [isDark, setIsDark] = useState(false);
+    const [isDark, setIsDark] = useState(true);
+
 
     // handle dark mode
     const toggleDarkMode = () => {
@@ -15,6 +16,7 @@ const ThemeToggle = () => {
             localStorage.setItem('theme', 'light');
         }
     }
+
 
     // get theme from localStorage
     useEffect(() => {

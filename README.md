@@ -43,6 +43,14 @@ A sleek, intuitive quote generator application built for the JustShop internship
 
 4. Open [http://localhost:3000](http://localhost:3000) to view the app in your browser
 
+5. Start the React test library
+   ```bash
+   npm test
+   # or
+   yarn test
+   ```
+
+
 ## 🛠️ Technologies Used
 
 - **React**: UI component library

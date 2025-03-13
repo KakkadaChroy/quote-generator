@@ -21,11 +21,13 @@ const QuoteGenerator = () => {
         error
     } = useQuote();
 
+
     // fetching quote
     useEffect(() => {
+        if (process.env.NODE_ENV === "test") return;
         const fetchQuote = async () => {
             await fetchQuoteGenerator();
-        }
+        };
         fetchQuote();
         // eslint-disable-next-line
     }, []);
@@ -42,8 +44,8 @@ const QuoteGenerator = () => {
 
 
     // render skeleton loading & error handling
-    if (quoteList.length === 0) return <CompleteQuoteSkeleton/>;
     if (error) return <QuoteError error={error} onRetry={handleGenerateQuote}/>;
+    if (quoteList.length === 0) return <CompleteQuoteSkeleton/>;
 
 
     return (

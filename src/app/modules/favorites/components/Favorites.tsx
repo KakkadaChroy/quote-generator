@@ -12,6 +12,7 @@ const Favorites = () => {
     const {favoriteSaved} = useFavorites();
     const dispatch = useAppDispatch();
 
+
     // State for dialog
     const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
