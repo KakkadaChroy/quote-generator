@@ -4,10 +4,14 @@ import {setError, setLoading, setQuoteList} from "./reducer";
 
 const useQuote = () => {
     // selected init state from reducer
-    const {quoteList, error, loading} = useAppSelector(state => state.quote);
-
-
-    // app dispatch
+    const {
+        quoteList,
+        currentQuote,
+        isCopyQuote,
+        isCopyCurrentQuote,
+        error,
+        loading
+    } = useAppSelector(state => state.quote);
     const dispatch = useAppDispatch();
 
 
@@ -35,10 +39,15 @@ const useQuote = () => {
 
     return {
         quoteList,
+        currentQuote,
+        isCopyQuote,
+        isCopyCurrentQuote,
+
         loading,
         error,
+        dispatch,
 
-        fetchQuoteGenerator
+        fetchQuoteGenerator,
     }
 }
 
