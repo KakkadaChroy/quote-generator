@@ -2,6 +2,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import PublicRoute from "./PublicRoute";
 import App from "../../App";
 
+
 const AppRoute = () => {
     return <>
         <BrowserRouter>
@@ -13,5 +14,6 @@ const AppRoute = () => {
         </BrowserRouter>
     </>
 }
+
 
 export {AppRoute};

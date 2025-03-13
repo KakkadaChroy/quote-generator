@@ -6,7 +6,6 @@ import {set} from "idb-keyval";
 // define model
 interface FavoriteReducerModel {
     favoriteSaved: QuoteModel[];
-    loadingSaved: boolean;
     isFavorite: boolean;
 }
 
@@ -14,7 +13,6 @@ interface FavoriteReducerModel {
 // init state
 const initialState: FavoriteReducerModel = {
     favoriteSaved: [],
-    loadingSaved: false,
     isFavorite: false,
 }
 
@@ -42,9 +40,6 @@ const favoritesSlice = createSlice({
         setSavedFavorites: (state, action: PayloadAction<QuoteModel[]>) => {
             state.favoriteSaved = action.payload;
         },
-        setSavedLoading: (state, action: PayloadAction<boolean>) => {
-            state.loadingSaved = action.payload;
-        },
     }
 })
 
@@ -53,7 +48,6 @@ export const {
     addFavorite,
     removeFavorite,
     setSavedFavorites,
-    setSavedLoading,
 } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

@@ -12,6 +12,7 @@ interface CardProps {
 const CurrentQuoteDisplay = ({currentQuote}:CardProps) => {
     const quotesToDisplay = Array.isArray(currentQuote) ? currentQuote : [currentQuote];
 
+    // if quote empty
     if (!currentQuote || currentQuote.length === 0) return null;
     if (quotesToDisplay.length === 0) return null;
 
