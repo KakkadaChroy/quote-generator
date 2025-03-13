@@ -2,7 +2,7 @@
 
 A sleek, intuitive quote generator application built for the JustShop internship program. This application allows users to generate inspiring quotes with a single click, copy them to clipboard, and save favorites for later reference.
 
-![Quote Generator Preview](https://just-shop-quote-generator.vercel.app)
+[![Quote Generator Preview](https://just-shop-quote-generator.vercel.app)](https://just-shop-quote-generator.vercel.app)
 
 ## ✨ Features
 
@@ -23,7 +23,7 @@ A sleek, intuitive quote generator application built for the JustShop internship
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/justshop-quote-generator.git
+   git clone https://github.com/KakkadaChroy/quote-generator.git
    cd quote-generator
    ```
 
