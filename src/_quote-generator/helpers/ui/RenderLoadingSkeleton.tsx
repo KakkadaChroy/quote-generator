@@ -4,7 +4,7 @@ import QuoteTitle from "../components/quote/QuoteTitle";
 
 export const CompleteQuoteSkeleton = () => {
     return (
-        <div className="bg-gray-100 min-h-screen w-full">
+        <div className="bg-gray-100 dark:bg-primary min-h-screen w-full">
             <div className="md:container mx-auto flex flex-col items-center justify-center w-full">
                 <div className="w-full max-w-3xl py-5">
                     {/*Title*/}
