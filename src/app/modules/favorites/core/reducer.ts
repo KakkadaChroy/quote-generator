@@ -7,13 +7,17 @@ import {set} from "idb-keyval";
 interface FavoriteReducerModel {
     favoriteSaved: QuoteModel[];
     loadingSaved: boolean;
+    isFavorite: boolean;
 }
+
 
 // init state
 const initialState: FavoriteReducerModel = {
     favoriteSaved: [],
     loadingSaved: false,
+    isFavorite: false,
 }
+
 
 // redux slice
 const favoritesSlice = createSlice({
@@ -21,15 +25,20 @@ const favoritesSlice = createSlice({
     initialState: initialState,
     reducers: {
         addFavorite: (state, action: PayloadAction<QuoteModel>) => {
+            if (!action.payload || !action.payload._id) return;
+
             if (!state.favoriteSaved.some(q => q._id === action.payload._id)) {
                 state.favoriteSaved.push(action.payload);
-                set("favorites", state.favoriteSaved); // Save to IndexedDB
+                set("favorites", JSON.parse(JSON.stringify(state.favoriteSaved)))
+                    .catch(err => console.error("IndexedDB save error:", err));
             }
         },
         removeFavorite: (state, action: PayloadAction<string>) => {
             state.favoriteSaved = state.favoriteSaved.filter(q => q._id !== action.payload);
-            set("favorites", state.favoriteSaved); // Update IndexedDB
+            set("favorites", JSON.parse(JSON.stringify(state.favoriteSaved)))
+                .catch(err => console.error("IndexedDB update error:", err));
         },
+
         setSavedFavorites: (state, action: PayloadAction<QuoteModel[]>) => {
             state.favoriteSaved = action.payload;
         },
@@ -44,6 +53,7 @@ export const {
     addFavorite,
     removeFavorite,
     setSavedFavorites,
-    setSavedLoading
+    setSavedLoading,
 } = favoritesSlice.actions;
+
 export default favoritesSlice.reducer;

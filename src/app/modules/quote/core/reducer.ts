@@ -8,16 +8,18 @@ interface QuoteReducerModel {
     isCopyQuote: string | null;
     isCopyCurrentQuote: string | null;
     loading: boolean;
+    pageLoading: boolean;
     error: string | null;
 }
 
 // init state
 const initialState: QuoteReducerModel = {
     quoteList: [],
-    currentQuote: [],
+    currentQuote: null,
     isCopyQuote: '',
     isCopyCurrentQuote: '',
     loading: false,
+    pageLoading: false,
     error: '',
 }
 
@@ -30,9 +32,6 @@ const quoteSlice = createSlice({
             state.quoteList = action.payload;
         },
         setCurrentQuote: (state, action: PayloadAction<QuoteModel>) => {
-            if (state.currentQuote) {
-                state.currentQuote = [state.currentQuote, ...state.quoteList];
-            }
             state.currentQuote = action.payload;
         },
         setIsCopyQuote: (state, action: PayloadAction<string>) => {
@@ -41,8 +40,12 @@ const quoteSlice = createSlice({
         setIsCopyCurrentQuote: (state, action: PayloadAction<string>) => {
           state.isCopyCurrentQuote = action.payload;
         },
+
         setLoading: (state, action: PayloadAction<boolean>)=> {
             state.loading = action.payload;
+        },
+        setPageLoading: (state, action: PayloadAction<boolean>) => {
+            state.pageLoading = action.payload;
         },
         setError: (state, action: PayloadAction<string | null>)=> {
             state.error = action.payload;
@@ -57,6 +60,7 @@ export const {
     setError,
     setCurrentQuote,
     setIsCopyQuote,
-    setIsCopyCurrentQuote
+    setIsCopyCurrentQuote,
+    setPageLoading
 } = quoteSlice.actions;
 export default quoteSlice.reducer;

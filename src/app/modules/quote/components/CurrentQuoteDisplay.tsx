@@ -1,7 +1,7 @@
 import React from 'react';
 import {QuoteModel} from "../core/model";
-import QuoteCard from "../../../../_quote-generator/helpers/components/quote/Card";
 import QuoteTag from "../../../../_quote-generator/helpers/components/quote/Tag";
+import QuoteCurrentCard from "../../../../_quote-generator/helpers/components/quote/CurrntQuoteCard";
 
 
 interface CardProps {
@@ -16,7 +16,7 @@ const CurrentQuoteDisplay = ({currentQuote}:CardProps) => {
     if (quotesToDisplay.length === 0) return null;
 
     return (
-        <div className="flex flex-col bg-gray-100">
+        <div className="flex flex-col bg-gray-100 dark:bg-primary">
             {
                 quotesToDisplay.map((item, index) => (
                     <div key={index} className="flex-grow px-4 py-6 flex flex-col justify-center items-center">
@@ -24,9 +24,7 @@ const CurrentQuoteDisplay = ({currentQuote}:CardProps) => {
                         <QuoteTag item={item}/>
 
                         {/* Quote Card */}
-                        <QuoteCard
-                            quoteItem={item}
-                        />
+                        <QuoteCurrentCard quoteItem={item}/>
                     </div>
                 ))
             }

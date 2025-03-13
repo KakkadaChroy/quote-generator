@@ -10,7 +10,7 @@
 /*Global Config*/
 @layer base {
     body {
-        @apply font-primary m-0 scroll-smooth;
+        @apply font-primary m-0 scroll-smooth dark:bg-primary dark:text-white;
     }
 }
 

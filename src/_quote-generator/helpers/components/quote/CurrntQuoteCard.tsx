@@ -1,8 +1,8 @@
 import {Quote as QuoteIcon} from "lucide-react";
 import {QuoteModel} from "../../../../app/modules/quote/core/model";
 import useQuote from "../../../../app/modules/quote/core/action";
-import {setIsCopyQuote} from "../../../../app/modules/quote/core/reducer";
-import CopyQuoteButton from "./CopyQuoteButton";
+import {setIsCopyCurrentQuote} from "../../../../app/modules/quote/core/reducer";
+import CopyCurrentQuoteButton from "./CopyCurrentQuoteButton";
 import useFavorites from "../../../../app/modules/favorites/core/action";
 
 
@@ -12,10 +12,11 @@ interface CardProps {
 }
 
 
-const QuoteCard = ({quoteItem}: CardProps) => {
+const QuoteCurrentCard = ({quoteItem}: CardProps) => {
     // custom hook
-    const {isCopyQuote, dispatch} = useQuote();
     const { favoriteSaved } = useFavorites();
+    const {isCopyCurrentQuote, dispatch, currentQuote} = useQuote();
+
 
     // custom hook
     const quoteText = `"${quoteItem.content}" — ${quoteItem.author}`;
@@ -23,13 +24,15 @@ const QuoteCard = ({quoteItem}: CardProps) => {
 
 
     // handle function copy quote
-    const handleCopyQuote = () => {
+    const handleCopyCurrentQuote = () => {
         navigator.clipboard.writeText(quoteText)
             .then(() => {
-                dispatch(setIsCopyQuote(quoteText));
-                setTimeout(() => {
-                    dispatch(setIsCopyQuote(""));
-                }, 1000);
+                if (currentQuote) {
+                    dispatch(setIsCopyCurrentQuote(quoteText));
+                    setTimeout(() => {
+                        dispatch(setIsCopyCurrentQuote(""));
+                    }, 1000);
+                }
             })
             .catch(err => {
                 console.error('Failed to copy', err);
@@ -52,13 +55,13 @@ const QuoteCard = ({quoteItem}: CardProps) => {
                 </div>
             </div>
 
-            {/* Action Buttons and Author */}
+            {/*Copy Quote Button*/}
             <div className="mt-6 flex justify-between items-center relative z-10">
-                <CopyQuoteButton
-                    isFavorite={isFavorite}
-                    isCopyQuote={isCopyQuote}
-                    handleCopyQuote={handleCopyQuote}
+                <CopyCurrentQuoteButton
                     quoteItem={quoteItem}
+                    handleCopyQuote={handleCopyCurrentQuote}
+                    isCopyCurrentQuote={isCopyCurrentQuote}
+                    isFavorite={isFavorite}
                 />
                 <p className="text-sm text-[#1c1c22] font-semibold">— {quoteItem.author}</p>
             </div>
@@ -66,4 +69,4 @@ const QuoteCard = ({quoteItem}: CardProps) => {
     </>
 }
 
-export default QuoteCard;
+export default QuoteCurrentCard;

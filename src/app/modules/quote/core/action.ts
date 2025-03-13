@@ -1,6 +1,6 @@
 import {reqQuoteGenerator} from "./request";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks/reduxHook";
-import {setError, setLoading, setQuoteList} from "./reducer";
+import {setError, setLoading, setPageLoading, setQuoteList} from "./reducer";
 
 const useQuote = () => {
     // selected init state from reducer
@@ -10,22 +10,26 @@ const useQuote = () => {
         isCopyQuote,
         isCopyCurrentQuote,
         error,
-        loading
+        loading,
+        pageLoading
     } = useAppSelector(state => state.quote);
     const dispatch = useAppDispatch();
 
 
     // fetch quote generator
     const fetchQuoteGenerator = async () => {
+        dispatch(setPageLoading(true));
         dispatch(setLoading(true));
         dispatch(setError(null));
         return await reqQuoteGenerator()
             .then((res) => {
                 dispatch(setQuoteList(res));
                 dispatch(setLoading(false));
+                dispatch(setPageLoading(false));
             })
             .catch(err => {
                 dispatch(setLoading(false));
+                dispatch(setPageLoading(false));
                 const errorMessage =
                     err.response?.data?.message ||
                     err.message ||
@@ -46,6 +50,7 @@ const useQuote = () => {
         loading,
         error,
         dispatch,
+        pageLoading,
 
         fetchQuoteGenerator,
     }

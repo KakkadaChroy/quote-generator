@@ -17,7 +17,7 @@ export const pathItems: PathItemModel[] = [
     {
         id: 3,
         pathName: "Setting",
-        link: "/setting",
+        link: "/",
         icon: Settings
     },
 ]

@@ -2,23 +2,26 @@ import useQuote from "../core/action";
 import {useEffect} from "react";
 import QuoteButton from "../../../../_quote-generator/helpers/components/quote/Button";
 import QuoteCard from "../../../../_quote-generator/helpers/components/quote/Card";
-import useFavorites from "../../favorites/core/action";
 import CurrentQuoteDisplay from "./CurrentQuoteDisplay";
 import QuoteTag from "../../../../_quote-generator/helpers/components/quote/Tag";
 import {setCurrentQuote} from "../core/reducer";
+import QuoteTitle from "../../../../_quote-generator/helpers/components/quote/QuoteTitle";
+import {CompleteQuoteSkeleton} from "../../../../_quote-generator/helpers/ui/RenderLoadingSkeleton";
+import QuoteError from "../../../../_quote-generator/helpers/ui/ErrorHandling";
 
 
 const QuoteGenerator = () => {
-    const {loadingSaved} = useFavorites();
+    // custom hook
     const {
         fetchQuoteGenerator,
         dispatch,
         loading,
         quoteList,
         currentQuote,
+        error
     } = useQuote();
 
-
+    // fetching quote
     useEffect(() => {
         const fetchQuote = async () => {
             await fetchQuoteGenerator();
@@ -28,6 +31,7 @@ const QuoteGenerator = () => {
     }, []);
 
 
+    // handle quote generator
     const handleGenerateQuote = async () => {
         if (loading) return;
         if (quoteList.length > 0) {
@@ -36,10 +40,19 @@ const QuoteGenerator = () => {
         await fetchQuoteGenerator();
     }
 
+
+    // render skeleton loading & error handling
+    if (quoteList.length === 0) return <CompleteQuoteSkeleton/>;
+    if (error) return <QuoteError error={error} onRetry={handleGenerateQuote}/>;
+
+
     return (
-        <div className={`w-full bg-gray-100 ${quoteList.length > 1 ? 'h-auto' : 'min-h-screen'}`}>
-            <div className="md:container mx-auto flex flex-col items-center justify-center">
-                <div className="md:max-w-2xl">
+        <div className={`bg-gray-100 dark:bg-primary ${quoteList.length > 1 ? 'h-auto' : 'min-h-screen'}`}>
+            <div className="min-h-[80vh] md:container mx-auto flex flex-col items-center justify-center">
+                <div className="w-full max-w-3xl min-w-2xl py-5">
+                    {/*Title*/}
+                    <QuoteTitle title={"New Quote"}/>
+
                     {/* Display the current quote */}
                     {quoteList?.length > 0 && (
                         <div className="flex-grow px-4 py-6 flex flex-col justify-center items-center">
@@ -55,10 +68,14 @@ const QuoteGenerator = () => {
                             <QuoteButton
                                 handleClick={handleGenerateQuote}
                                 loading={loading}
-                                loadingSaved={loadingSaved}
                             />
                         </div>
                     )}
+
+                    {/*Title*/}
+                    {
+                        currentQuote && <QuoteTitle title="Current Quote"/>
+                    }
 
                     {/* Display previous quotes if available */}
                     {currentQuote && (
