@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {QuoteModel} from "./model";
 
+
 // define model
 interface QuoteReducerModel {
     quoteList: QuoteModel[];
@@ -11,6 +12,7 @@ interface QuoteReducerModel {
     pageLoading: boolean;
     error: string | null;
 }
+
 
 // init state
 const initialState: QuoteReducerModel = {
@@ -23,11 +25,13 @@ const initialState: QuoteReducerModel = {
     error: '',
 }
 
+
 // redux slice
 const quoteSlice = createSlice({
     name: "quote",
     initialState: initialState,
     reducers: {
+        // Redux action
         setQuoteList: (state, action: PayloadAction<QuoteModel[]>)=> {
             state.quoteList = action.payload;
         },
@@ -41,6 +45,7 @@ const quoteSlice = createSlice({
           state.isCopyCurrentQuote = action.payload;
         },
 
+        // Consider grouping UI state updates and checking
         setLoading: (state, action: PayloadAction<boolean>)=> {
             state.loading = action.payload;
         },

@@ -8,13 +8,13 @@ import EmptyFavorites from "../../../../_quote-generator/helpers/components/favo
 import ShareQuoteDialog from "../../../../_quote-generator/helpers/ui/ShareQuoteAlertDialog";
 
 const Favorites = () => {
+    // State for dialog
+    const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
+
+
     // custom hook
     const {favoriteSaved} = useFavorites();
     const dispatch = useAppDispatch();
-
-
-    // State for dialog
-    const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
 
     // handle removed favorite
@@ -28,7 +28,6 @@ const Favorites = () => {
         const quoteText = `"${content}" — ${author}`;
         navigator.clipboard.writeText(quoteText)
             .then(() => {
-                // Show dialog instead of alert
                 setIsShareDialogOpen(true);
             })
             .catch(err => {

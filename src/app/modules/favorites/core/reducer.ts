@@ -6,14 +6,12 @@ import {set} from "idb-keyval";
 // define model
 interface FavoriteReducerModel {
     favoriteSaved: QuoteModel[];
-    isFavorite: boolean;
 }
 
 
 // init state
 const initialState: FavoriteReducerModel = {
     favoriteSaved: [],
-    isFavorite: false,
 }
 
 
@@ -22,6 +20,7 @@ const favoritesSlice = createSlice({
     name: 'favorites',
     initialState: initialState,
     reducers: {
+        // Redux action
         addFavorite: (state, action: PayloadAction<QuoteModel>) => {
             if (!action.payload || !action.payload._id) return;
 
@@ -36,7 +35,6 @@ const favoritesSlice = createSlice({
             set("favorites", JSON.parse(JSON.stringify(state.favoriteSaved)))
                 .catch(err => console.error("IndexedDB update error:", err));
         },
-
         setSavedFavorites: (state, action: PayloadAction<QuoteModel[]>) => {
             state.favoriteSaved = action.payload;
         },

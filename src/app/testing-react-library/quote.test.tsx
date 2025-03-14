@@ -39,7 +39,7 @@ jest.mock('../../_quote-generator/helpers/components/quote/Tag', () => {
     };
 });
 
-jest.mock('../modules/quote/components/CurrentQuoteDisplay', () => {
+jest.mock('../modules/quote/components/PreviousQuoteDisplay', () => {
     return function MockCurrentQuoteDisplay({ currentQuote }: { currentQuote: Quote }) {
         return <div data-testid="current-quote-display">{currentQuote.content}</div>;
     };

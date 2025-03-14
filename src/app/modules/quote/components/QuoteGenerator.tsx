@@ -2,7 +2,7 @@ import useQuote from "../core/action";
 import {useEffect} from "react";
 import QuoteButton from "../../../../_quote-generator/helpers/components/quote/Button";
 import QuoteCard from "../../../../_quote-generator/helpers/components/quote/Card";
-import CurrentQuoteDisplay from "./CurrentQuoteDisplay";
+import PreviousQuoteDisplay from "./PreviousQuoteDisplay";
 import QuoteTag from "../../../../_quote-generator/helpers/components/quote/Tag";
 import {setCurrentQuote} from "../core/reducer";
 import QuoteTitle from "../../../../_quote-generator/helpers/components/quote/QuoteTitle";
@@ -24,7 +24,7 @@ const QuoteGenerator = () => {
 
     // fetching quote
     useEffect(() => {
-        if (process.env.NODE_ENV === "test") return;
+        if (process.env.NODE_ENV === "test") return; // testing
         const fetchQuote = async () => {
             await fetchQuoteGenerator();
         };
@@ -52,7 +52,7 @@ const QuoteGenerator = () => {
         <div className={`bg-gray-100 dark:bg-primary ${quoteList.length > 1 ? 'h-auto' : 'min-h-screen'}`}>
             <div className="min-h-[80vh] md:container mx-auto flex flex-col items-center justify-center">
                 <div className="w-full max-w-3xl min-w-2xl py-5">
-                    {/*Title*/}
+                    {/*Title New Quote*/}
                     <QuoteTitle title={"New Quote"}/>
 
                     {/* Display the current quote */}
@@ -74,7 +74,7 @@ const QuoteGenerator = () => {
                         </div>
                     )}
 
-                    {/*Title*/}
+                    {/*Title previous Quote*/}
                     {
                         currentQuote && <QuoteTitle title="Current Quote"/>
                     }
@@ -82,7 +82,7 @@ const QuoteGenerator = () => {
                     {/* Display previous quotes if available */}
                     {currentQuote && (
                         <div className="pb-20">
-                            <CurrentQuoteDisplay
+                            <PreviousQuoteDisplay
                                 currentQuote={currentQuote}
                             />
                         </div>

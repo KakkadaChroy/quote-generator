@@ -1,3 +1,4 @@
+// Quote Model
 export interface QuoteModel {
     _id?:          string;
     content?:      string;

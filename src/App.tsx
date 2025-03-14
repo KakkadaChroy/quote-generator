@@ -6,6 +6,7 @@ import {useAppDispatch} from "./app/redux/hooks/reduxHook";
 function App() {
   const dispatch = useAppDispatch();
 
+  // load data from indexDB for client-side
   useEffect(() => {
     loadFavoritesFromDB(dispatch);
   }, [dispatch]);

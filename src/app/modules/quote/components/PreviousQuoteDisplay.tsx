@@ -4,12 +4,13 @@ import QuoteTag from "../../../../_quote-generator/helpers/components/quote/Tag"
 import QuoteCurrentCard from "../../../../_quote-generator/helpers/components/quote/CurrntQuoteCard";
 
 
+// define Props
 interface CardProps {
     currentQuote: QuoteModel | QuoteModel[];
 }
 
 
-const CurrentQuoteDisplay = ({currentQuote}:CardProps) => {
+const PreviousQuoteDisplay = ({currentQuote}:CardProps) => {
     const quotesToDisplay = Array.isArray(currentQuote) ? currentQuote : [currentQuote];
 
     // if quote empty
@@ -33,4 +34,4 @@ const CurrentQuoteDisplay = ({currentQuote}:CardProps) => {
     );
 };
 
-export default CurrentQuoteDisplay;
+export default PreviousQuoteDisplay;
